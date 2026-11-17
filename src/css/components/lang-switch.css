@@ -1,0 +1,31 @@
+/* ==========================================================================
+   Language switch (shared by the site and the demo dashboard)
+   ========================================================================== */
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.12em;
+}
+
+.lang-switch__btn {
+  min-width: 2rem;
+  min-height: 2.5rem;
+  padding-inline: 0.3rem;
+  opacity: 0.68;
+  text-decoration: underline transparent;
+  text-underline-offset: 0.45em;
+  transition: opacity 0.2s ease, text-decoration-color 0.2s ease;
+}
+.lang-switch__btn:hover { opacity: 1; }
+.lang-switch__btn[aria-pressed='true'] {
+  opacity: 1;
+  text-decoration-color: currentColor;
+}
+.lang-switch__sep { opacity: 0.5; }
+
+.lang-switch--large { font-size: 0.875rem; }
+.lang-switch--large .lang-switch__btn { min-height: 2.75rem; min-width: 2.5rem; }
+

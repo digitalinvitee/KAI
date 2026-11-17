@@ -1,0 +1,4 @@
+# KAI is a fictional restaurant concept by INVITÉ Studio.
+User-agent: *
+Allow: /
+Disallow: /demo-dashboard/

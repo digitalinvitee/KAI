@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title data-i18n="meta.title">KAI — Contemporary Japanese Dining · A concept by INVITÉ Studio</title>
+  <meta name="description" content="KAI is a fictional contemporary Japanese restaurant: an independent concept project by INVITÉ Studio with editorial art direction, a bilingual menu and a demo booking flow." data-i18n-attr="content:meta.description">
+  <meta name="theme-color" content="#25251F">
+  <meta name="color-scheme" content="light">
+
+  <!-- Language alternates. scripts/build.mjs rewrites these to absolute URLs when SITE_URL is set. -->
+  <link rel="alternate" hreflang="en" href="./" data-site-url>
+  <link rel="alternate" hreflang="de" href="./?lang=de" data-site-url>
+  <link rel="alternate" hreflang="x-default" href="./" data-site-url>
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="KAI · INVITÉ Studio">
+  <meta property="og:title" content="KAI — Contemporary Japanese Dining" data-i18n-attr="content:meta.title">
+  <meta property="og:description" content="An independent concept project by INVITÉ Studio: a fictional contemporary Japanese restaurant." data-i18n-attr="content:meta.description">
+  <meta property="og:image" content="assets/og/kai-og.jpg" data-site-url>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="KAI wordmark. A concept by INVITÉ Studio.">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+
+  <link rel="preload" href="assets/fonts/manrope-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/noto-sans-jp-kai.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="assets/images/kai-hero.webp" media="(min-width: 768px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/kai-hero-mobile.webp" media="(max-width: 767.98px)" fetchpriority="high">
+  <link rel="preload" href="assets/vendor/gsap/gsap.min.js" as="script" media="(prefers-reduced-motion: no-preference)">
+  <link rel="preload" href="assets/vendor/gsap/ScrollTrigger.min.js" as="script" media="(prefers-reduced-motion: no-preference)">
+
+  <script>
+    /* Runs before first paint: marks JS support, motion preference and a pending translation. */
+    (function () {
+      var root = document.documentElement;
+      root.classList.remove('no-js');
+      root.classList.add('js');
+      try { if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) root.classList.add('motion-ok'); } catch (e) {}
+      try {
+        var requested = new URLSearchParams(window.location.search).get('lang') || JSON.parse(window.localStorage.getItem('kai-locale') || 'null');
+        if (requested && requested !== 'en') { root.lang = requested; root.classList.add('i18n-pending'); }
+      } catch (e) {}
+      window.setTimeout(function () { root.classList.remove('i18n-pending'); root.classList.add('motion-failsafe'); }, 2600);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="src/css/main.css" data-build="css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "KAI — Contemporary Japanese Dining",
+    "description": "Independent concept project: a website for a fictional contemporary Japanese restaurant. KAI is not a real business.",
+    "genre": "Concept website",
+    "inLanguage": ["en", "de"],
+    "creator": { "@type": "Organization", "name": "INVITÉ Studio", "url": "https://invitee.ge" }
+  }
+  </script>
+
+  <script type="module" src="src/js/main.js" data-build="js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="common.skip">Skip to content</a>
+
+  <header class="site-header" data-header data-theme="dark">
+    <div class="site-header__inner" data-hero-item>
+      <a class="brand" href="#top" aria-label="KAI, back to the top of the page" data-i18n-attr="aria-label:common.homeLink">
+        <span class="brand__word">KAI</span>
+        <span class="brand__kanji" lang="ja" aria-hidden="true">会</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Main" data-i18n-attr="aria-label:nav.label">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="#philosophy" data-nav-link="philosophy" data-i18n="nav.philosophy">Philosophy</a></li>
+          <li><a class="site-nav__link" href="#menu" data-nav-link="menu" data-i18n="nav.menu">Menu</a></li>
+          <li><a class="site-nav__link" href="#space" data-nav-link="space" data-i18n="nav.space">The Space</a></li>
+          <li><a class="site-nav__link" href="#private-dining" data-nav-link="private-dining" data-i18n="nav.privateDining">Private dining</a></li>
+          <li><a class="site-nav__link" href="#visit" data-nav-link="visit" data-i18n="nav.visit">Visit</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:common.languageLabel" data-lang-switch></div>
+        <a class="button button--outline button--compact site-header__reserve" href="#reservations">
+          <span class="site-header__reserve-long" data-i18n="nav.reserve">Reserve a table</span>
+          <span class="site-header__reserve-short" data-i18n="nav.reserveShort">Reserve</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" data-nav-toggle>
+          <span class="nav-toggle__lines" aria-hidden="true"></span>
+          <span class="sr-only" data-nav-toggle-label data-i18n="common.openNav">Open navigation</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-nav surface-dark" id="mobile-nav" data-mobile-nav hidden>
+    <div class="mobile-nav__inner">
+      <nav class="mobile-nav__nav" aria-label="Main" data-i18n-attr="aria-label:nav.label">
+        <ul class="mobile-nav__list">
+          <li><a class="mobile-nav__link" href="#philosophy" data-i18n="nav.philosophy">Philosophy</a></li>
+          <li><a class="mobile-nav__link" href="#menu" data-i18n="nav.menu">Menu</a></li>
+          <li><a class="mobile-nav__link" href="#space" data-i18n="nav.space">The Space</a></li>
+          <li><a class="mobile-nav__link" href="#private-dining" data-i18n="nav.privateDining">Private dining</a></li>
+          <li><a class="mobile-nav__link" href="#visit" data-i18n="nav.visit">Visit</a></li>
+        </ul>
+      </nav>
+      <div class="mobile-nav__footer">
+        <a class="button button--light button--block" href="#reservations"><span data-i18n="nav.reserve">Reserve a table</span><span class="button__arrow" aria-hidden="true">→</span></a>
+        <div class="mobile-nav__meta">
+          <div class="lang-switch lang-switch--large" role="group" aria-label="Language" data-i18n-attr="aria-label:common.languageLabel" data-lang-switch></div>
+          <p class="mobile-nav__concept" data-i18n="common.conceptShort">A concept by INVITÉ Studio</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main" tabindex="-1">
+    <!-- 01 · Hero ───────────────────────────────────────────── -->
+    <section class="hero surface-dark" id="top" data-theme="dark" aria-labelledby="hero-title">
+      <figure class="hero__media" data-hero-media>
+        <picture>
+          <source media="(max-width: 767.98px)" srcset="assets/images/kai-hero-mobile.webp" width="752" height="940">
+          <img class="hero__image" src="assets/images/kai-hero.webp" width="1672" height="941"
+               alt="A chef at work behind a long counter of pale wood, set for the evening, with a garden beyond the window and low, warm light."
+               data-i18n-attr="alt:hero.imageAlt" fetchpriority="high" decoding="async"
+               style="--focus: 66% 50%; --focus-mobile: 50% 50%">
+        </picture>
+      </figure>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <div class="hero__veil" aria-hidden="true" data-hero-veil></div>
+
+      <div class="hero__content">
+        <p class="hero__concept" data-hero-item>
+          <span class="hero__concept-dot" aria-hidden="true"></span>
+          <span class="hero__concept-long" data-i18n="common.concept">Independent concept project by INVITÉ Studio</span>
+          <span class="hero__concept-short" data-i18n="common.conceptShort">A concept by INVITÉ Studio</span>
+        </p>
+
+        <div class="hero__stage">
+          <h1 class="hero__title" id="hero-title">
+            <span class="sr-only" data-i18n="hero.title">KAI, contemporary Japanese dining</span>
+            <span class="wordmark" aria-hidden="true">
+              <span class="wordmark__mask"><span class="wordmark__letter">K</span></span><span class="wordmark__mask"><span class="wordmark__letter">A</span></span><span class="wordmark__mask"><span class="wordmark__letter">I</span></span>
+            </span>
+          </h1>
+
+          <p class="hero__kanji" data-hero-item>
+            <span class="hero__kanji-glyph" lang="ja" aria-hidden="true">会</span>
+            <span class="sr-only" data-i18n="hero.kanjiLabel">Kai, written 会: a meeting</span>
+          </p>
+
+          <div class="hero__aside">
+            <p class="hero__statement" data-hero-item data-i18n="hero.statement">The art of less.</p>
+            <p class="hero__category" data-hero-item>
+              <span data-i18n="hero.category">Contemporary Japanese Dining</span>
+              <span class="hero__detail" data-i18n="hero.detail">Omakase counter and dining room · Tuesday to Saturday from 17:30</span>
+            </p>
+            <div class="hero__actions" data-hero-item>
+              <a class="button button--light hero__cta" href="#reservations">
+                <span data-i18n="hero.cta">Reserve a table</span><span class="button__arrow" aria-hidden="true">→</span>
+              </a>
+              <a class="hero__menu-link" href="#menu" data-i18n="hero.menuCta">View the menu</a>
+            </div>
+          </div>
+        </div>
+
+        <a class="scroll-cue" href="#philosophy" data-hero-item>
+          <span class="scroll-cue__label" data-i18n="hero.scroll">Scroll</span>
+          <span class="scroll-cue__line" aria-hidden="true"></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 02 · Philosophy ─────────────────────────────────────── -->
+    <section class="section philosophy" id="philosophy" data-theme="light" aria-labelledby="philosophy-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow" data-i18n="philosophy.eyebrow">Philosophy</p>
+          <h2 class="display display--xl philosophy__title" id="philosophy-title" data-i18n-lines="philosophy.title" data-reveal-lines>
+            <span class="line"><span class="line__inner">Every detail</span></span> <span class="line"><span class="line__inner">has a purpose.</span></span>
+          </h2>
+        </header>
+
+        <div class="philosophy__grid">
+          <div class="philosophy__kanji" data-reveal>
+            <p class="kanji-card">
+              <span class="kanji-card__glyph" lang="ja" aria-hidden="true">会</span>
+              <span class="kanji-card__reading">
+                <i lang="ja-Latn" data-i18n="philosophy.kanjiReading">kai</i>
+                <span data-i18n="philosophy.kanjiMeaning">a meeting, a gathering</span>
+              </span>
+            </p>
+            <p class="kanji-card__note" data-i18n-html="philosophy.ichigo">The same character ends <i lang="ja-Latn">ichigo ichie</i> (<span lang="ja">一期一会</span>), a phrase from the tea ceremony: one time, one meeting. No encounter happens twice.</p>
+          </div>
+
+          <div class="philosophy__text">
+            <p class="lead" data-reveal data-i18n="philosophy.lead">Each evening at the counter happens once: between guest and kitchen, season and hand, rice and fish.</p>
+            <p class="body-copy" data-reveal data-i18n="philosophy.body">We cook what the week brings in. Every piece is cut and seasoned in front of you, and anything that does not serve the flavour stays off the plate.</p>
+            <h3 class="sr-only" data-i18n="philosophy.principlesLabel">Three principles</h3>
+            <dl class="principles" data-reveal-stagger>
+              <div class="principle">
+                <dt class="principle__title" data-i18n="philosophy.principles.season.title">Season</dt>
+                <dd class="principle__text" data-i18n="philosophy.principles.season.text">The menu follows the market, not the other way round.</dd>
+              </div>
+              <div class="principle">
+                <dt class="principle__title" data-i18n="philosophy.principles.precision.title">Precision</dt>
+                <dd class="principle__text" data-i18n="philosophy.principles.precision.text">Rice at body temperature. Fish aged for days, not hours.</dd>
+              </div>
+              <div class="principle">
+                <dt class="principle__title" data-i18n="philosophy.principles.hospitality.title">Hospitality</dt>
+                <dd class="principle__text" data-i18n="philosophy.principles.hospitality.text">Ten seats, one counter, one conversation.</dd>
+              </div>
+            </dl>
+          </div>
+
+          <figure class="media philosophy__dish" data-reveal-media>
+            <div class="media__frame" style="--ratio: 4 / 5">
+              <img class="media__img" src="assets/images/kai-signature-dish.webp" width="752" height="940" loading="lazy" decoding="async"
+                   alt="A single piece of white-fish nigiri topped with amber roe, herbs and a small purple flower, on a dark stoneware plate." data-i18n-attr="alt:philosophy.dishAlt"
+                   style="--focus: 50% 50%">
+            </div>
+            <figcaption class="caption"><span class="caption__index"><span data-i18n="common.fig">Fig.</span> 01</span><span data-i18n="philosophy.dishCaption">Nigiri, finished by hand at the counter</span></figcaption>
+          </figure>
+
+          <figure class="media philosophy__detail" data-reveal-media>
+            <div class="media__frame" style="--ratio: 1 / 1">
+              <img class="media__img" src="assets/images/kai-detail.webp" width="940" height="940" loading="lazy" decoding="async"
+                   alt="A sake flask and cup beside a small dish on a dark stone counter, chopsticks on a rest and blossom above." data-i18n-attr="alt:philosophy.detailAlt"
+                   style="--focus: 50% 50%">
+            </div>
+            <figcaption class="caption"><span class="caption__index"><span data-i18n="common.fig">Fig.</span> 02</span><span data-i18n="philosophy.detailCaption">One small course and a cup of sake</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · Menu ───────────────────────────────────────────── -->
+    <section class="section menu" id="menu" data-theme="light" aria-labelledby="menu-title">
+      <div class="container menu__layout">
+        <div class="menu__aside">
+          <p class="eyebrow" data-i18n="menu.eyebrow">Menu</p>
+          <h2 class="display display--lg" id="menu-title" data-i18n-lines="menu.title" data-reveal-lines>
+            <span class="line"><span class="line__inner">The menu</span></span>
+          </h2>
+          <p class="menu__intro" data-reveal data-i18n="menu.intro">Written each week around the market.</p>
+
+          <figure class="media menu__figure" data-reveal-media>
+            <div class="media__frame" style="--ratio: 4 / 5">
+              <img class="media__img" src="assets/images/kai-omakase.webp" width="752" height="940" loading="lazy" decoding="async"
+                   alt="Four pieces of nigiri (tuna, white fish, seared fish and prawn) on a stone slab with salmon roe and ginger, small bowls behind them." data-i18n-attr="alt:menu.imageAlt"
+                   style="--focus: 50% 50%">
+            </div>
+            <figcaption class="caption"><span class="caption__index"><span data-i18n="common.fig">Fig.</span> 03</span><span data-i18n="menu.imageCaption">Nigiri from the omakase sequence</span></figcaption>
+          </figure>
+
+          <div class="menu-legend" data-reveal>
+            <h3 class="label" data-i18n="menu.legendTitle">Dietary key</h3>
+            <ul class="menu-legend__list" data-diet-legend></ul>
+            <p class="menu-legend__note" data-i18n="menu.legendNote">Allergens follow EU Regulation 1169/2011. Turn on “Show allergens” to see them for every dish, and please tell us about allergies when you book.</p>
+          </div>
+        </div>
+
+        <div class="menu__main">
+          <div class="menu-tabs" role="tablist" aria-label="Menu categories" data-i18n-attr="aria-label:menu.tabsLabel" data-menu-tabs>
+            <button class="menu-tabs__tab" type="button" role="tab" id="menu-tab-omakase" aria-controls="menu-panel-omakase" aria-selected="true" tabindex="0" data-category="omakase" data-i18n="menu.categories.omakase">Omakase</button>
+            <button class="menu-tabs__tab" type="button" role="tab" id="menu-tab-alacarte" aria-controls="menu-panel-alacarte" aria-selected="false" tabindex="-1" data-category="alacarte" data-i18n="menu.categories.alacarte">À la carte</button>
+            <button class="menu-tabs__tab" type="button" role="tab" id="menu-tab-drinks" aria-controls="menu-panel-drinks" aria-selected="false" tabindex="-1" data-category="drinks" data-i18n="menu.categories.drinks">Drinks</button>
+            <span class="menu-tabs__indicator" aria-hidden="true" data-menu-indicator></span>
+          </div>
+
+          <div class="menu-tools">
+            <p class="menu-tools__note"><span class="concept-tag" data-i18n="common.conceptTag">Concept</span> <span data-i18n="menu.sample">Sample menu · prices in euros, service included</span></p>
+            <button class="switch" type="button" aria-pressed="false" aria-controls="menu-panels" data-allergen-toggle>
+              <span class="switch__track" aria-hidden="true"><span class="switch__thumb"></span></span>
+              <span data-i18n="menu.allergensToggle">Show allergens</span>
+            </button>
+          </div>
+
+          <div class="menu-panels" id="menu-panels" data-menu-panels>
+            <div class="menu-panel" role="tabpanel" id="menu-panel-omakase" aria-labelledby="menu-tab-omakase" tabindex="0" data-menu-panel="omakase"></div>
+            <div class="menu-panel" role="tabpanel" id="menu-panel-alacarte" aria-labelledby="menu-tab-alacarte" tabindex="0" data-menu-panel="alacarte" hidden></div>
+            <div class="menu-panel" role="tabpanel" id="menu-panel-drinks" aria-labelledby="menu-tab-drinks" tabindex="0" data-menu-panel="drinks" hidden></div>
+          </div>
+
+          <div class="menu-cta" data-reveal>
+            <p class="menu-cta__text" data-i18n="menu.ctaText">The omakase is served at the counter, by reservation only.</p>
+            <a class="button button--primary" href="#reservations"><span data-i18n="nav.reserve">Reserve a table</span><span class="button__arrow" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · The Space ──────────────────────────────────────── -->
+    <section class="section space" id="space" data-theme="dark" data-dark-section aria-labelledby="space-title">
+      <div class="container">
+        <header class="section-head space__head">
+          <p class="eyebrow" data-i18n="space.eyebrow">The Space</p>
+          <h2 class="display display--xl" id="space-title" data-i18n-lines="space.title" data-reveal-lines>
+            <span class="line"><span class="line__inner">Hinoki, stone</span></span> <span class="line"><span class="line__inner">and a little light.</span></span>
+          </h2>
+          <div class="space__intro">
+            <p class="lead" data-reveal data-i18n="space.lead">A nine-metre counter of hinoki cypress, a quiet dining room behind it, and light only where hands are working.</p>
+          </div>
+        </header>
+
+        <div class="space__gallery">
+          <figure class="media space__interior" data-reveal-media>
+            <div class="media__frame" style="--ratio: 3 / 2">
+              <img class="media__img" src="assets/images/kai-interior.webp" width="1410" height="940" loading="lazy" decoding="async" data-parallax
+                   alt="A long counter of pale wood with a row of wooden chairs and set places, a lit back wall, and a garden with a large stone beyond the window." data-i18n-attr="alt:space.figures.interior.alt"
+                   style="--focus: 50% 50%">
+            </div>
+            <figcaption class="caption"><span class="caption__index"><span data-i18n="common.fig">Fig.</span> 04</span><span data-i18n="space.figures.interior.caption">The counter before the first seating</span></figcaption>
+          </figure>
+
+          <figure class="media space__chef" data-reveal-media>
+            <div class="media__frame" style="--ratio: 3 / 4">
+              <img class="media__img" src="assets/images/kai-chef.webp" width="705" height="940" loading="lazy" decoding="async" data-parallax
+                   alt="A chef in a white jacket placing a fleck of gold leaf on a piece of tuna nigiri on a dark stone board." data-i18n-attr="alt:space.figures.chef.alt"
+                   style="--focus: 50% 30%">
+            </div>
+            <figcaption class="caption"><span class="caption__index"><span data-i18n="common.fig">Fig.</span> 05</span><span data-i18n="space.figures.chef.caption">Every piece is made in front of the guest</span></figcaption>
+          </figure>
+
+          <div class="space__materials" data-reveal>
+            <h3 class="label" data-i18n="space.materialsTitle">Materials</h3>
+            <dl class="materials">
+              <div class="materials__row"><dt data-i18n="space.materials.hinoki.name">Hinoki cypress</dt><dd data-i18n="space.materials.hinoki.use">Counter</dd></div>
+              <div class="materials__row"><dt data-i18n="space.materials.basalt.name">Basalt</dt><dd data-i18n="space.materials.basalt.use">Floor</dd></div>
+              <div class="materials__row"><dt data-i18n="space.materials.plaster.name">Lime plaster</dt><dd data-i18n="space.materials.plaster.use">Walls</dd></div>
+              <div class="materials__row"><dt data-i18n="space.materials.washi.name">Washi paper</dt><dd data-i18n="space.materials.washi.use">Light</dd></div>
+              <div class="materials__row"><dt data-i18n="space.materials.stoneware.name">Shigaraki stoneware</dt><dd data-i18n="space.materials.stoneware.use">Tableware</dd></div>
+            </dl>
+          </div>
+
+          <figure class="media space__g1" data-reveal-media>
+            <div class="media__frame" style="--ratio: 3 / 4">
+              <img class="media__img" src="assets/images/kai-gallery-01.webp" width="705" height="940" loading="lazy" decoding="async" data-parallax
+                   alt="A still water basin and a maple in the entrance garden; through tall openings, the warmly lit dining room." data-i18n-attr="alt:space.figures.gallery1.alt"
+                   style="--focus: 50% 50%">
+            </div>
+            <figcaption class="caption"><span class="caption__index"><span data-i18n="common.fig">Fig.</span> 06</span><span data-i18n="space.figures.gallery1.caption">The garden at the entrance</span></figcaption>
+          </figure>
+
+          <figure class="media space__g2" data-reveal-media>
+            <div class="media__frame" style="--ratio: 16 / 10">
+              <img class="media__img" src="assets/images/kai-gallery-02.webp" width="1504" height="940" loading="lazy" decoding="async" data-parallax
+                   alt="A matcha mousse and a quenelle of matcha ice cream with a lace tuile and white blossom on a speckled plate; a tea bowl and an iron teapot behind." data-i18n-attr="alt:space.figures.gallery2.alt"
+                   style="--focus: 50% 50%">
+            </div>
+            <figcaption class="caption"><span class="caption__index"><span data-i18n="common.fig">Fig.</span> 07</span><span data-i18n="space.figures.gallery2.caption">The last course: matcha, with a lace tuile</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · Private dining ─────────────────────────────────── -->
+    <section class="section private" id="private-dining" data-theme="light" aria-labelledby="private-title">
+      <div class="container private__layout">
+        <div class="private__text">
+          <p class="eyebrow" data-i18n="private.eyebrow">Private dining</p>
+          <h2 class="display display--lg" id="private-title" data-i18n-lines="private.title" data-reveal-lines>
+            <span class="line"><span class="line__inner">An evening</span></span> <span class="line"><span class="line__inner">of your own.</span></span>
+          </h2>
+          <p class="lead private__lead" data-reveal data-i18n="private.lead">For a private dinner, a celebration or a business evening. The counter seats ten, the dining room eighteen.</p>
+          <p class="body-copy" data-reveal data-i18n="private.body">Tell us the date, the size of your group and the occasion, and the restaurant replies with what is possible.</p>
+          <div class="private__actions" data-reveal>
+            <button class="button button--primary" type="button" aria-haspopup="dialog" data-enquiry-open><span data-i18n="private.cta">Make an enquiry</span><span class="button__arrow" aria-hidden="true">→</span></button>
+          </div>
+          <p class="concept-note" data-reveal><span class="concept-tag" data-i18n="common.conceptTag">Concept</span> <span data-i18n="private.conceptNote">KAI is fictional. A real restaurant sets its own private dining options; this enquiry only prepares a message.</span></p>
+        </div>
+
+        <figure class="media private__figure" data-reveal-media>
+          <div class="media__frame" style="--ratio: 4 / 5">
+            <img class="media__img" src="assets/images/kai-private.webp" width="1410" height="940" loading="lazy" decoding="async"
+                 alt="A peach-coloured drink with a layer of foam and small purple flowers in a coupe glass on a dark stone table; behind it a sake flask, a cup and a sprig of blossom." data-i18n-attr="alt:private.imageAlt"
+                 style="--focus: 50% 50%">
+          </div>
+          <figcaption class="caption"><span class="caption__index"><span data-i18n="common.fig">Fig.</span> 08</span><span data-i18n="private.imageCaption">The evening begins</span></figcaption>
+        </figure>
+      </div>
+
+      <dialog class="enquiry" aria-labelledby="enquiry-title" data-enquiry>
+        <form class="enquiry__form" novalidate data-enquiry-form>
+          <div class="enquiry__head">
+            <p class="eyebrow" data-i18n="private.eyebrow">Private dining</p>
+            <h3 class="enquiry__title" id="enquiry-title" data-i18n="private.dialog.title">Private dining enquiry</h3>
+            <button class="enquiry__close" type="button" aria-label="Close" data-i18n-attr="aria-label:private.dialog.close" data-enquiry-close>
+              <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 3l10 10M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+            </button>
+          </div>
+          <div class="fields">
+            <div class="field">
+              <label class="field__label" for="enquiry-occasion" data-i18n="private.dialog.occasion">Occasion</label>
+              <select class="field__input field__select" id="enquiry-occasion" name="occasion" data-enquiry-field="occasion">
+                <option value="dinner" data-i18n="private.dialog.occasions.dinner">Private dinner</option>
+                <option value="celebration" data-i18n="private.dialog.occasions.celebration">Celebration</option>
+                <option value="business" data-i18n="private.dialog.occasions.business">Business dinner</option>
+                <option value="other" data-i18n="private.dialog.occasions.other">Something else</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field__label" for="enquiry-guests" data-i18n="private.dialog.guests">Guests</label>
+              <input class="field__input" id="enquiry-guests" name="guests" type="number" inputmode="numeric" min="2" max="200" value="10" aria-describedby="enquiry-error-guests" data-enquiry-field="guests">
+              <p class="field-error" id="enquiry-error-guests" hidden data-enquiry-error="guests"></p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="enquiry-date"><span data-i18n="private.dialog.date">Preferred date</span><span class="field__optional" data-i18n="booking.fields.optional">optional</span></label>
+              <input class="field__input" id="enquiry-date" name="date" type="date" data-enquiry-field="date">
+            </div>
+            <div class="field field--wide">
+              <label class="field__label" for="enquiry-name" data-i18n="private.dialog.name">Your name</label>
+              <input class="field__input" id="enquiry-name" name="name" type="text" autocomplete="name" maxlength="80" aria-describedby="enquiry-error-name" data-enquiry-field="name">
+              <p class="field-error" id="enquiry-error-name" hidden data-enquiry-error="name"></p>
+            </div>
+            <div class="field field--wide">
+              <label class="field__label" for="enquiry-message"><span data-i18n="private.dialog.message">What do you have in mind?</span><span class="field__optional" data-i18n="booking.fields.optional">optional</span></label>
+              <textarea class="field__input field__input--area" id="enquiry-message" name="message" rows="3" maxlength="500" data-enquiry-field="message"></textarea>
+            </div>
+          </div>
+          <p class="enquiry__note" data-i18n="private.dialog.note">This opens your email or WhatsApp with the enquiry written out. Nothing is sent until you send it yourself.</p>
+          <div class="handoff__actions">
+            <a class="button button--primary" href="mailto:" data-enquiry-send="email"><span data-i18n="private.dialog.email">Prepare email</span><span class="button__arrow" aria-hidden="true">→</span></a>
+            <a class="button button--ghost" href="https://wa.me/" target="_blank" rel="noopener" data-enquiry-send="whatsapp" data-i18n="private.dialog.whatsapp">Prepare WhatsApp message</a>
+          </div>
+          <p class="concept-note" data-recipient-note hidden><span class="concept-tag" data-i18n="common.conceptTag">Concept</span> <span data-i18n="handoff.noRecipient">No restaurant email or WhatsApp number is set yet, so the message opens without a recipient.</span></p>
+        </form>
+      </dialog>
+    </section>
+
+    <!-- 06 · Reservations ───────────────────────────────────── -->
+    <section class="section reserve" id="reservations" data-theme="light" aria-labelledby="reserve-title">
+      <div class="container reserve__layout">
+        <div class="reserve__aside">
+          <p class="eyebrow" data-i18n="booking.eyebrow">Reservations</p>
+          <h2 class="display display--lg" id="reserve-title" data-i18n-lines="booking.title" data-reveal-lines>
+            <span class="line"><span class="line__inner">A seat</span></span> <span class="line"><span class="line__inner">at the counter.</span></span>
+          </h2>
+          <p class="lead reserve__lead" data-reveal data-i18n="booking.lead">Two seatings each evening, Tuesday to Saturday.</p>
+
+          <div class="demo-notice" role="note" data-reveal data-mode-notice>
+            <p class="demo-notice__title"><span class="demo-notice__mark" aria-hidden="true"></span><span data-i18n="booking.notices.demo.title">Portfolio demo</span></p>
+            <p class="demo-notice__text" data-i18n="booking.notices.demo.text">No real reservation will be created. Your booking stays in this browser tab and is never sent anywhere.</p>
+          </div>
+
+          <dl class="facts" data-reveal>
+            <div class="facts__row">
+              <dt data-i18n="booking.facts.seatingsTitle">Seatings</dt>
+              <dd data-hours="seatings">17:30 – 18:30 and 20:30 – 21:30</dd>
+            </div>
+            <div class="facts__row">
+              <dt data-i18n="booking.facts.groupsTitle">Larger groups</dt>
+              <dd data-i18n-html="booking.facts.groupsText">More than eight guests? <a href="#private-dining">Make a private dining enquiry</a>.</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="reserve__panel">
+          <fieldset class="booking-modes" hidden data-booking-modes>
+            <legend class="booking-modes__legend"><span class="concept-tag" data-i18n="common.conceptTag">Concept</span> <span data-i18n="booking.modes.legend">How bookings can work for a live restaurant</span></legend>
+            <div class="booking-modes__options">
+              <label class="booking-modes__option"><input type="radio" name="booking-mode" value="demo" checked><span data-i18n="booking.modes.demo">Demo booking</span></label>
+              <label class="booking-modes__option"><input type="radio" name="booking-mode" value="request"><span data-i18n="booking.modes.request">Request by message</span></label>
+              <label class="booking-modes__option"><input type="radio" name="booking-mode" value="provider"><span data-i18n="booking.modes.provider">Booking system</span></label>
+            </div>
+            <p class="booking-modes__note" data-booking-mode-note data-i18n="booking.modes.notes.demo">Simulated availability and a demo dashboard, to show the whole journey. Nothing is booked.</p>
+          </fieldset>
+
+          <form class="booking" novalidate aria-label="Demo reservation" data-i18n-attr="aria-label:booking.formLabel.demo" data-booking>
+            <ol class="booking-steps" data-booking-steps>
+              <li class="booking-steps__item" data-step-marker="1"><span class="booking-steps__num">1</span><span data-i18n="booking.steps.0">Table</span></li>
+              <li class="booking-steps__item" data-step-marker="2"><span class="booking-steps__num">2</span><span data-i18n="booking.steps.1">Details</span></li>
+              <li class="booking-steps__item" data-step-marker="3"><span class="booking-steps__num">3</span><span data-i18n="booking.steps.2">Review</span></li>
+            </ol>
+
+            <p class="sr-only" aria-live="polite" data-booking-live></p>
+            <div class="error-summary" role="alert" tabindex="-1" hidden data-error-summary></div>
+
+            <!-- Step 1 · Table -->
+            <section class="booking-step" data-step="1" aria-labelledby="booking-step-1-title">
+              <h3 class="booking-step__title" id="booking-step-1-title" tabindex="-1" data-i18n="booking.stepTitles.0">Choose your table</h3>
+              <div class="booking-step__grid">
+                <fieldset class="field-group field-group--calendar">
+                  <legend class="field-group__legend" data-i18n="booking.date.legend">Date</legend>
+                  <div class="calendar" data-calendar></div>
+                  <p class="field-error" id="booking-error-date" hidden data-error-for="date"></p>
+                </fieldset>
+
+                <div class="booking-step__side">
+                  <fieldset class="field-group">
+                    <legend class="field-group__legend" data-i18n="booking.guests.legend">Guests</legend>
+                    <div class="guest-picker" data-guest-picker></div>
+                    <p class="field-hint" data-i18n-html="booking.guests.note">Up to 8 guests online. <a href="#private-dining">Larger group?</a></p>
+                  </fieldset>
+
+                  <fieldset class="field-group" aria-describedby="booking-slots-status">
+                    <legend class="field-group__legend" data-i18n="booking.time.legend">Time</legend>
+                    <p class="field-hint slots-status" id="booking-slots-status" data-slots-status data-i18n="booking.time.pickDate">Choose a date to see available times.</p>
+                    <div class="slots" data-slots></div>
+                    <p class="field-error" id="booking-error-time" hidden data-error-for="time"></p>
+                  </fieldset>
+                </div>
+              </div>
+            </section>
+
+            <!-- Step 2 · Details -->
+            <section class="booking-step" data-step="2" aria-labelledby="booking-step-2-title" hidden>
+              <h3 class="booking-step__title" id="booking-step-2-title" tabindex="-1" data-i18n="booking.stepTitles.1">Your details</h3>
+              <div class="fields">
+                <div class="field">
+                  <label class="field__label" for="booking-name" data-i18n="booking.fields.name">Full name</label>
+                  <input class="field__input" id="booking-name" name="name" type="text" autocomplete="name" maxlength="80" required aria-describedby="booking-error-name" data-field="name">
+                  <p class="field-error" id="booking-error-name" hidden data-error-for="name"></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="booking-email"><span data-i18n="booking.fields.email">Email</span><span class="field__optional field__optional--request" data-i18n="booking.fields.optional">optional</span></label>
+                  <input class="field__input" id="booking-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" spellcheck="false" required aria-describedby="booking-error-email" data-field="email">
+                  <p class="field-error" id="booking-error-email" hidden data-error-for="email"></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="booking-phone"><span data-i18n="booking.fields.phone">Phone</span><span class="field__optional field__optional--request" data-i18n="booking.fields.optional">optional</span></label>
+                  <input class="field__input" id="booking-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="24" required aria-describedby="booking-hint-phone booking-error-phone" data-field="phone">
+                  <p class="field-hint" id="booking-hint-phone" data-i18n="booking.fields.phoneHint">Include your country code, for example +49.</p>
+                  <p class="field-error" id="booking-error-phone" hidden data-error-for="phone"></p>
+                </div>
+                <div class="field field--wide">
+                  <label class="field__label" for="booking-requests">
+                    <span data-i18n="booking.fields.requests">Special requests</span>
+                    <span class="field__optional" data-i18n="booking.fields.optional">optional</span>
+                  </label>
+                  <textarea class="field__input field__input--area" id="booking-requests" name="requests" rows="3" maxlength="400" aria-describedby="booking-hint-requests booking-count-requests booking-error-requests" data-field="requests"></textarea>
+                  <div class="field__foot">
+                    <p class="field-hint" id="booking-hint-requests" data-i18n="booking.fields.requestsHint">Allergies, a celebration, accessibility needs.</p>
+                    <p class="field-hint field__count" id="booking-count-requests" data-requests-count>0 / 300</p>
+                  </div>
+                  <p class="field-error" id="booking-error-requests" hidden data-error-for="requests"></p>
+                </div>
+              </div>
+              <p class="privacy-note" data-mode-text="booking.fields.privacy" data-i18n="booking.fields.privacy.demo">Demo privacy: email, phone and requests are never stored. Only your first name and last initial stay in this tab.</p>
+            </section>
+
+            <!-- Step 3 · Review -->
+            <section class="booking-step" data-step="3" aria-labelledby="booking-step-3-title" hidden>
+              <h3 class="booking-step__title" id="booking-step-3-title" tabindex="-1" data-mode-text="booking.reviewTitle" data-i18n="booking.reviewTitle.demo">Review your booking</h3>
+              <div class="demo-notice demo-notice--inline" role="note" data-mode-notice>
+                <p class="demo-notice__title"><span class="demo-notice__mark" aria-hidden="true"></span><span data-i18n="booking.notices.demo.title">Portfolio demo</span></p>
+                <p class="demo-notice__text" data-i18n="booking.notices.demo.text">No real reservation will be created. Your booking stays in this browser tab and is never sent anywhere.</p>
+              </div>
+              <dl class="review" data-review></dl>
+
+              <div class="handoff" hidden data-handoff>
+                <div class="handoff__actions">
+                  <a class="button button--primary" href="https://wa.me/" target="_blank" rel="noopener" data-handoff-link="whatsapp"><span data-i18n="booking.request.whatsapp">Send via WhatsApp</span><span class="button__arrow" aria-hidden="true">→</span></a>
+                  <a class="button button--ghost" href="mailto:" data-handoff-link="email" data-i18n="booking.request.email">Send by email</a>
+                </div>
+                <p class="handoff__status" role="status" data-handoff-status></p>
+                <details class="handoff__preview">
+                  <summary class="handoff__label" data-i18n="booking.request.messageTitle">See the message</summary>
+                  <p class="handoff__message" data-handoff-message></p>
+                </details>
+                <p class="field-hint" data-handoff-call></p>
+                <p class="concept-note" data-recipient-note hidden><span class="concept-tag" data-i18n="common.conceptTag">Concept</span> <span data-i18n="handoff.noRecipient">No restaurant email or WhatsApp number is set yet, so the message opens without a recipient.</span></p>
+              </div>
+            </section>
+
+            <!-- Step 4 · Confirmation -->
+            <section class="booking-step booking-step--done" data-step="4" aria-labelledby="booking-step-4-title" hidden>
+              <p class="booking-done__badge"><span class="demo-notice__mark" aria-hidden="true"></span><span data-i18n="common.demoBadge">Portfolio demo</span></p>
+              <h3 class="booking-done__title" id="booking-step-4-title" tabindex="-1" data-i18n="booking.confirmation.title">Demo reservation recorded.</h3>
+              <p class="booking-done__text" data-i18n="booking.confirmation.text">This was a demonstration. No restaurant has received your booking and no email will be sent.</p>
+              <div class="booking-done__ticket" data-confirmation></div>
+              <p class="field-hint" data-i18n="booking.confirmation.saved">Saved in this browser tab only. It disappears when you close the tab.</p>
+              <div class="booking-done__actions">
+                <a class="button button--primary" href="demo-dashboard/" data-dashboard-link><span data-i18n="booking.actions.dashboard">View in demo dashboard</span><span class="button__arrow" aria-hidden="true">→</span></a>
+                <button class="button button--ghost" type="button" data-action="restart" data-i18n="booking.actions.another">Make another demo booking</button>
+              </div>
+            </section>
+
+            <div class="booking__actions" data-booking-actions>
+              <button class="button button--ghost" type="button" data-action="back" hidden data-i18n="booking.actions.back">Back</button>
+              <button class="button button--primary booking__next" type="submit" data-action="next">
+                <span data-next-label data-i18n="booking.actions.continue">Continue</span><span class="button__arrow" aria-hidden="true">→</span>
+              </button>
+            </div>
+          </form>
+
+          <div class="booking booking--provider" hidden data-booking-provider>
+            <h3 class="booking-step__title" data-i18n="booking.provider.title">Book online</h3>
+            <p class="booking-provider__text" data-i18n="booking.provider.text">Choose a time on the restaurant’s booking page. The confirmation comes from there.</p>
+            <div class="handoff__actions">
+              <a class="button button--primary" target="_blank" rel="noopener" data-provider-link><span data-provider-label data-i18n="booking.provider.button">Continue to online booking</span><span class="button__arrow" aria-hidden="true">↗</span></a>
+            </div>
+            <p class="field-hint" data-provider-call></p>
+            <p class="concept-note"><span class="concept-tag" data-i18n="common.conceptTag">Concept</span> <span data-i18n="booking.provider.conceptNote">A live site links to the system the restaurant already uses, such as OpenTable, SevenRooms, TheFork or Quandoo.</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer surface-dark" id="visit" data-theme="dark">
+    <div class="container site-footer__grid">
+      <div class="site-footer__brand">
+        <p class="site-footer__wordmark" aria-hidden="true">KAI<span class="site-footer__kanji" lang="ja">会</span></p>
+        <p class="site-footer__tagline" data-i18n="footer.tagline">Contemporary Japanese Dining</p>
+      </div>
+
+      <section class="site-footer__col visit" aria-labelledby="visit-title">
+        <h2 class="label" id="visit-title" data-i18n="visit.title">Visit</h2>
+        <address class="visit__address" data-visit-address>
+          <span class="visit__placeholder"><span class="concept-tag" data-i18n="common.conceptTag">Concept</span> <span data-i18n="visit.addressPlaceholder">The restaurant’s address appears here.</span></span>
+        </address>
+        <p class="visit__directions" data-visit-directions></p>
+        <p class="visit__hours">
+          <span data-hours="open">Tue – Sat · 17:30 – 23:00</span><br>
+          <span data-hours="closed">Sun and Mon · closed</span>
+        </p>
+      </section>
+
+      <section class="site-footer__col contact" aria-labelledby="contact-title">
+        <h2 class="label" id="contact-title" data-i18n="visit.contactTitle">Contact</h2>
+        <ul class="contact__list" data-contact-actions></ul>
+        <p class="site-footer__note" hidden data-contact-note><span class="concept-tag" data-i18n="common.conceptTag">Concept</span> <span data-i18n="visit.conceptNote">On a live site, these links open the phone, WhatsApp, email and maps apps directly.</span></p>
+        <a class="contact__reserve" href="#reservations"><span data-i18n="nav.reserve">Reserve a table</span><span aria-hidden="true"> →</span></a>
+      </section>
+
+      <div class="site-footer__col site-footer__about">
+        <h2 class="label" data-i18n="footer.aboutTitle">About this site</h2>
+        <p data-i18n="footer.about">KAI is a fictional restaurant. This website is an independent concept project designed and developed by INVITÉ Studio. It does not accept real reservations.</p>
+        <p class="site-footer__note" data-i18n="footer.imagery">Images are AI-generated concept visuals, not photographs of a real place.</p>
+        <p class="site-footer__links"><a href="demo-dashboard/" data-i18n="nav.dashboard">Demo dashboard</a></p>
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:common.languageLabel" data-lang-switch></div>
+      </div>
+    </div>
+
+    <div class="container site-footer__base">
+      <p data-i18n="footer.rights">© 2026 INVITÉ Studio. Concept, design and code.</p>
+      <a class="site-footer__studio" href="https://invitee.ge" target="_blank" rel="noopener" aria-label="Visit INVITÉ Studio (opens in a new tab)" data-i18n-attr="aria-label:footer.studioLink"><span data-i18n="footer.credit">Designed and developed by INVITÉ Studio</span><svg viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3 2h5v5" fill="none" stroke="currentColor" stroke-width="1"/></svg></a>
+      <a class="site-footer__top" href="#top" data-i18n="common.backToTop">Back to top</a>
+    </div>
+  </footer>
+
+  <!-- Phones and tablets: the two most common actions, shown once the hero has scrolled away. -->
+  <nav class="action-bar" aria-label="Quick actions" data-i18n-attr="aria-label:nav.quickActions" inert data-action-bar>
+    <a class="button button--outline action-bar__menu" href="#menu"><span data-i18n="nav.menu">Menu</span></a>
+    <a class="button button--primary action-bar__reserve" href="#reservations"><span data-i18n="nav.reserve">Reserve a table</span><span class="button__arrow" aria-hidden="true">→</span></a>
+  </nav>
+</body>
+</html>

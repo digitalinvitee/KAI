@@ -1,0 +1,132 @@
+/* ==========================================================================
+   Private dining · a quiet invitation and an enquiry that prepares a message
+   ========================================================================== */
+
+.private__layout {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4rem);
+}
+
+.private__text {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+.private__lead { max-width: 26ch; }
+
+.private__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+/* Below the two-column layout the picture is a landscape strip, so the section stays short. */
+.private__figure { max-width: 40rem; }
+
+@media (max-width: 1023.98px) {
+  .private__figure .media__frame { aspect-ratio: 3 / 2; }
+}
+
+@media (min-width: 1024px) {
+  .private__layout {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    align-items: center;
+  }
+  .private__figure { grid-column: 1 / 6; grid-row: 1; max-width: none; }
+  .private__text { grid-column: 7 / 12; grid-row: 1; }
+}
+
+/* ── Enquiry dialog ───────────────────────────────────────── */
+
+.enquiry {
+  --ink: var(--charcoal);
+  --ink-2: var(--ink-muted);
+  --rule: rgb(37 37 31 / 0.14);
+  --rule-strong: rgb(37 37 31 / 0.55);
+  --accent: var(--rust-ink);
+  --focus-ring: var(--rust);
+  width: min(42rem, calc(100% - 2 * var(--margin)));
+  max-width: none;
+  max-height: calc(100dvh - 2rem);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+}
+.enquiry::backdrop {
+  background: rgb(28 28 23 / 0.62);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+.enquiry__form {
+  container-type: inline-size;
+  display: grid;
+  gap: 1.5rem;
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+}
+
+.enquiry__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem 1rem;
+  align-items: start;
+}
+.enquiry__head .eyebrow { grid-column: 1; }
+.enquiry__title {
+  grid-column: 1;
+  font-size: var(--step-3);
+  font-weight: var(--weight-light);
+  line-height: 1.08;
+  letter-spacing: var(--tracking-title);
+}
+.enquiry__close {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: -0.5rem -0.5rem 0 0;
+  border: 1px solid var(--rule);
+  transition: border-color 0.2s ease;
+}
+.enquiry__close:hover { border-color: var(--ink); }
+.enquiry__close svg { width: 0.9rem; height: 0.9rem; }
+
+.enquiry__note {
+  max-width: 60ch;
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--rule-strong);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* Selects share the input style (booking.css); this adds the arrow. */
+.field__input.field__select {
+  padding-right: 2.75rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%2325251F' stroke-width='1.2'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 0.75rem;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .enquiry[open] { animation: enquiry-in 0.45s var(--ease-out); }
+  .enquiry[open]::backdrop { animation: enquiry-fade 0.45s ease; }
+}
+@keyframes enquiry-in {
+  from { opacity: 0; transform: translateY(14px); }
+}
+@keyframes enquiry-fade {
+  from { opacity: 0; }
+}

@@ -1,0 +1,110 @@
+/* ==========================================================================
+   KAI · Design tokens
+   Layout concept: a 12-column architectural grid. Content sits like objects
+   along one long counter, held apart by generous intervals (ma).
+   ========================================================================== */
+
+/* Registered so the page canvas can cross-fade between light and dark. */
+@property --surface { syntax: '<color>'; inherits: true; initial-value: #EDE9DF; }
+@property --ink { syntax: '<color>'; inherits: true; initial-value: #25251F; }
+@property --ink-2 { syntax: '<color>'; inherits: true; initial-value: #5E564A; }
+@property --rule { syntax: '<color>'; inherits: true; initial-value: rgb(37 37 31 / 0.16); }
+@property --rule-strong { syntax: '<color>'; inherits: true; initial-value: rgb(37 37 31 / 0.55); }
+@property --accent { syntax: '<color>'; inherits: true; initial-value: #9E4A2F; }
+
+:root {
+  /* Palette ─ from the KAI brief */
+  --ivory: #EDE9DF;        /* primary background */
+  --ivory-deep: #E4DFD3;   /* quiet panels */
+  --paper: #F5F2EB;        /* booking surface */
+  --field: #FBFAF6;        /* form inputs */
+  --charcoal: #25251F;     /* primary text, dark sections */
+  --charcoal-soft: #2E2E27;
+  --charcoal-deep: #1C1C17;
+  --stone: #8F8372;        /* decorative only (3:1 on ivory) */
+  --sand: #B5AC96;         /* secondary text on dark (6.8:1) */
+  --rust: #B75839;         /* accent fills and marks */
+  --rust-ink: #9E4A2F;     /* accent text on light (5:1) */
+  --rust-glow: #DB8566;    /* accent text on dark (5.5:1) */
+  --ink-muted: #5E564A;    /* secondary text on light (6:1) */
+
+  /* Theme roles (light canvas by default) */
+  --surface: var(--ivory);
+  --ink: var(--charcoal);
+  --ink-2: var(--ink-muted);
+  --rule: rgb(37 37 31 / 0.16);
+  --rule-strong: rgb(37 37 31 / 0.55);
+  --accent: var(--rust-ink);
+  --media-bg: #D9D3C5;
+  --focus-ring: var(--rust);
+
+  /* Type · one family in four upright weights. Japanese only where Japanese is written. */
+  --font-sans: 'Manrope', 'Manrope Fallback', 'Helvetica Neue', Arial, sans-serif;
+  --font-jp: 'Noto Sans JP KAI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif;
+
+  --weight-light: 300;      /* editorial headings, leads, the wordmark */
+  --weight-regular: 400;    /* body text */
+  --weight-medium: 500;     /* navigation, buttons, labels */
+  --weight-semibold: 600;   /* the smallest marks: badges, tags, demo notices */
+
+  --tracking-display: -0.032em;  /* headings at display size */
+  --tracking-title: -0.02em;     /* statements, tabs, set names */
+  --tracking-tight: -0.01em;     /* leads and mid-size text */
+  --tracking-nav: 0.14em;        /* uppercase navigation and buttons */
+  --tracking-label: 0.16em;      /* uppercase labels and eyebrows */
+  --tracking-wordmark: 0.3em;    /* K A I */
+
+  --step--2: clamp(0.6875rem, 0.67rem + 0.08vw, 0.75rem);   /* 11–12 px · labels */
+  --step--1: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);   /* 13–14 px · small text */
+  --step-0: clamp(1rem, 0.96rem + 0.12vw, 1.0625rem);       /* 16–17 px · body */
+  --step-1: clamp(1.125rem, 1.05rem + 0.32vw, 1.3125rem);   /* 18–21 px */
+  --step-2: clamp(1.3125rem, 1.14rem + 0.72vw, 1.75rem);    /* 21–28 px · leads */
+  --step-3: clamp(1.625rem, 1.36rem + 1.25vw, 2.5rem);      /* 26–40 px */
+  --step-4: clamp(2.125rem, 1.5rem + 2.6vw, 4.25rem);       /* 34–68 px · display */
+  --step-5: clamp(2.125rem, 1.2rem + 4.8vw, 6.5rem);        /* 34–104 px · display */
+
+  /* Space */
+  --margin: clamp(1rem, 4.4vw, 4.5rem);
+  --gutter: clamp(0.875rem, 0.5rem + 1.6vw, 2rem);
+  --section-y: clamp(4.5rem, 2rem + 7vw, 9rem);
+  --header-h: 3.75rem;
+  --max-width: 1720px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  color-scheme: light;
+}
+
+@media (min-width: 1024px) {
+  :root { --header-h: 4.5rem; }
+}
+
+/* The canvas turns dark while "The Space" fills the screen. */
+:root {
+  transition:
+    --surface 0.9s var(--ease-in-out),
+    --ink 0.9s var(--ease-in-out),
+    --ink-2 0.9s var(--ease-in-out),
+    --rule 0.9s var(--ease-in-out),
+    --rule-strong 0.9s var(--ease-in-out),
+    --accent 0.9s var(--ease-in-out);
+}
+
+html.is-dark,
+.surface-dark,
+.no-js .space {
+  --surface: var(--charcoal);
+  --ink: var(--ivory);
+  --ink-2: var(--sand);
+  --rule: rgb(237 233 223 / 0.14);
+  --rule-strong: rgb(237 233 223 / 0.42);
+  --accent: var(--rust-glow);
+  --media-bg: #34342C;
+  --focus-ring: var(--rust-glow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { transition: none; }
+}

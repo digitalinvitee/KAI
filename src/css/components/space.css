@@ -1,0 +1,80 @@
+/* ==========================================================================
+   The Space · architectural gallery on the dark canvas
+   ========================================================================== */
+
+.no-js .space {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.space__head { align-items: end; }
+
+.space__intro {
+  display: grid;
+  gap: 1.25rem;
+  align-content: end;
+}
+
+.space__gallery {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: clamp(3rem, 8vw, 8rem);
+}
+
+.space__interior {
+  grid-column: 1 / -1;
+  margin-inline: calc(-1 * max(var(--margin), env(safe-area-inset-left, 0px)));
+}
+.space__interior .caption { padding-inline: max(var(--margin), env(safe-area-inset-left, 0px)); }
+.space__chef { grid-column: 4 / -1; }
+.space__materials { grid-column: 1 / -1; }
+.space__g1 { grid-column: 1 / 9; }
+.space__g2 { grid-column: 1 / -1; }
+
+.materials {
+  margin-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+.materials__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-block: 0.9rem;
+  border-bottom: 1px solid var(--rule);
+}
+.materials__row dt {
+  font-size: var(--step-1);
+  font-weight: var(--weight-light);
+  line-height: 1.25;
+  letter-spacing: var(--tracking-tight);
+}
+.materials__row dd {
+  font-size: var(--step--2);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+/* Images drift inside their frames on large screens (see motion.js). */
+.has-parallax .media__img[data-parallax] { scale: 1.14; }
+
+@media (min-width: 1024px) {
+  .space__head {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+  }
+  .space__head .eyebrow { grid-column: 1 / -1; }
+  .space__head .display { grid-column: 1 / 9; }
+  .space__intro { grid-column: 9 / 13; padding-bottom: 0.5rem; }
+
+  .space__interior { grid-column: 1 / 9; grid-row: 1; margin-inline: 0; }
+  .space__interior .caption { padding-inline: 0; }
+  .space__chef { grid-column: 10 / 13; grid-row: 1; align-self: end; margin-bottom: clamp(-14rem, -12vw, -6rem); }
+  .space__materials { grid-column: 1 / 5; grid-row: 2; align-self: start; padding-top: 1rem; }
+  .space__g1 { grid-column: 6 / 9; grid-row: 2; }
+  .space__g2 { grid-column: 4 / 13; grid-row: 3; }
+}

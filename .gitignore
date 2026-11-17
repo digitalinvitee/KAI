@@ -1,0 +1,7 @@
+node_modules/
+dist/
+images-src/
+tests/e2e/screenshots/
+.DS_Store
+Thumbs.db
+*.log

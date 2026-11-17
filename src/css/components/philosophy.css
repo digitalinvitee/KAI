@@ -1,0 +1,104 @@
+/* ==========================================================================
+   Philosophy · editorial composition
+   ========================================================================== */
+
+.philosophy__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: clamp(3rem, 8vw, 5rem);
+}
+
+.philosophy__kanji,
+.philosophy__text { grid-column: 1 / -1; }
+.philosophy__dish { grid-column: 3 / -1; }
+.philosophy__detail { grid-column: 1 / 9; margin-top: -1rem; }
+
+.kanji-card {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.25rem;
+}
+.kanji-card__glyph {
+  font-size: clamp(5.5rem, 3.6rem + 6.5vw, 10rem);
+  font-weight: var(--weight-light);
+  line-height: 0.88;
+  color: var(--ink);
+}
+.kanji-card__reading {
+  display: grid;
+  gap: 0.35rem;
+  padding-bottom: 0.5rem;
+  font-size: var(--step--1);
+  line-height: 1.4;
+  text-wrap: balance;
+  color: var(--ink-2);
+}
+.kanji-card__reading i {
+  font-size: 1.75rem;
+  font-weight: var(--weight-light);
+  line-height: 1;
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink);
+}
+.kanji-card__note {
+  margin-top: 1.75rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--rule);
+  font-size: var(--step--1);
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 34ch;
+}
+.kanji-card__note i { font-weight: var(--weight-medium); color: var(--ink); }
+.kanji-card__note [lang='ja'] { white-space: nowrap; }
+
+.philosophy__text {
+  display: grid;
+  align-content: start;
+  gap: 1.5rem;
+}
+.philosophy__text .lead { max-width: 26ch; }
+
+.principles {
+  margin-top: clamp(1rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--rule);
+}
+.principle {
+  display: grid;
+  gap: 0.35rem;
+  padding-block: 1.1rem;
+  border-bottom: 1px solid var(--rule);
+}
+.principle__title {
+  font-size: var(--step--2);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.principle__text {
+  font-size: var(--step-1);
+  font-weight: var(--weight-light);
+  line-height: 1.38;
+  letter-spacing: -0.005em;
+  text-wrap: pretty;
+}
+
+@media (min-width: 600px) {
+  .principle {
+    grid-template-columns: 10.5rem minmax(0, 1fr);
+    gap: 1.25rem;
+    align-items: baseline;
+  }
+}
+
+@media (min-width: 900px) {
+  .philosophy__title .line:last-child { padding-left: 25%; }
+
+  .philosophy__kanji { grid-column: 1 / 4; grid-row: 1; }
+  .philosophy__text { grid-column: 5 / 9; grid-row: 1 / 3; }
+  .philosophy__dish { grid-column: 9 / 13; grid-row: 1 / 3; margin-top: clamp(2rem, 8vw, 9rem); }
+  .philosophy__detail { grid-column: 1 / 4; grid-row: 2; align-self: end; margin-top: 0; }
+}
+

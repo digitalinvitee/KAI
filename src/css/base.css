@@ -1,0 +1,240 @@
+/* ==========================================================================
+   Base · reset, typography, utilities
+   ========================================================================== */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+/* House rule: upright type only, everywhere. Manrope ships no italic, and
+   font-synthesis: none (on body) stops the browser from slanting one. */
+*,
+*::before,
+*::after { font-style: normal !important; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 0.5rem);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  font-weight: var(--weight-regular);
+  line-height: 1.65;
+  font-synthesis: none;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+img,
+picture,
+svg { display: block; max-width: 100%; }
+img { height: auto; }
+
+button,
+input,
+textarea,
+select { font: inherit; color: inherit; letter-spacing: inherit; }
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+h1, h2, h3, h4, p, dl, dd, figure, ol, ul, fieldset { margin: 0; }
+h1, h2, h3, h4, th { font-weight: inherit; }
+strong, b { font-weight: var(--weight-semibold); }
+ul, ol { padding: 0; list-style: none; }
+fieldset { border: 0; padding: 0; min-width: 0; }
+legend { padding: 0; }
+
+[hidden] { display: none !important; }
+
+::selection { background: var(--rust); color: var(--ivory); }
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+[lang='ja'] { font-family: var(--font-jp); }
+
+main:focus { outline: none; }
+
+/* Translations are applied before the page is shown to German readers. */
+html.i18n-pending body { opacity: 0; }
+
+/* ── Typography roles ─────────────────────────────────────── */
+
+.display {
+  font-weight: var(--weight-light);
+  line-height: 1.02;
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+.display--xl { font-size: var(--step-5); }
+.display--lg { font-size: var(--step-4); }
+
+/* On large screens the --lg titles sit in four-column asides; keep each art-directed line on one line. */
+@media (min-width: 1024px) {
+  .display--lg { font-size: min(var(--step-4), 4vw); }
+}
+
+/* Art-directed lines; each one is a mask for the reveal animation.
+   The padding leaves room for Manrope's accents and descenders. */
+.line {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.08em 0.16em;
+  margin-block: -0.08em -0.16em;
+}
+.line__inner { display: block; }
+
+/* Uppercase is kept for small things: navigation, buttons, labels, eyebrows.
+   'case' centres dashes, colons, dots and arrows on the capitals. */
+.eyebrow,
+.label {
+  font-size: var(--step--2);
+  font-weight: var(--weight-medium);
+  line-height: 1.4;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  font-feature-settings: 'case';
+  color: var(--ink-2);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+.eyebrow::before {
+  content: '';
+  width: 2.75rem;
+  height: 1px;
+  background: currentColor;
+}
+
+.lead {
+  font-size: var(--step-2);
+  font-weight: var(--weight-light);
+  line-height: 1.32;
+  letter-spacing: var(--tracking-tight);
+  text-wrap: pretty;
+  max-width: 30ch;
+}
+
+.body-copy {
+  color: var(--ink-2);
+  max-width: 46ch;
+  text-wrap: pretty;
+}
+
+.caption {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  margin-top: 0.9rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.caption__index {
+  flex: none;
+  font-size: 0.6875rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+/* ── Concept labelling ───────────────────────────────────────
+   KAI is fictional. Anything a real restaurant would supply (prices, contact
+   details, a booking system) carries this small tag where it appears. */
+
+.concept-tag {
+  display: inline-block;
+  padding: 0.2rem 0.45rem 0.15rem;
+  border: 1px solid currentColor;
+  font-size: 0.625rem;
+  font-weight: var(--weight-semibold);
+  line-height: 1.3;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-feature-settings: 'case';
+  white-space: nowrap;
+  vertical-align: 0.12em;
+  color: var(--accent);
+}
+
+.concept-note {
+  max-width: 52ch;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+.concept-note .concept-tag { margin-right: 0.45rem; }
+
+/* ── Utilities ────────────────────────────────────────────── */
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 0.75rem);
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.85rem 1.1rem;
+  background: var(--charcoal);
+  color: var(--ivory);
+  font-size: 0.875rem;
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  transform: translateY(-220%);
+  transition: transform 0.2s var(--ease-out);
+}
+.skip-link:focus { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

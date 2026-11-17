@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Page not found · KAI</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#25251F">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <style>
+    /* Standalone page: same Manrope file as the site. A relative URL only resolves one
+       level deep, so deeper missing paths fall back to Arial sized to match. */
+    @font-face { font-family: 'Manrope'; src: url('assets/fonts/manrope-latin-var.woff2') format('woff2'); font-weight: 300 600; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Manrope Fallback'; src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('Helvetica'); size-adjust: 101.73%; ascent-override: 104.78%; descent-override: 29.49%; line-gap-override: 0%; }
+    :root { --ivory: #EDE9DF; --charcoal: #25251F; --sand: #B5AC96; color-scheme: dark; }
+    *, *::before, *::after { box-sizing: border-box; font-style: normal !important; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: max(1.5rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1.5rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+      background: var(--charcoal);
+      color: var(--ivory);
+      font-family: 'Manrope', 'Manrope Fallback', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 400;
+      font-synthesis: none;
+      -webkit-font-smoothing: antialiased;
+      text-align: center;
+    }
+    main { display: grid; gap: 1.5rem; max-width: 30rem; }
+    .mark { margin: 0 -0.3em 0.5rem 0; font-size: clamp(3.5rem, 16vw, 6rem); font-weight: 300; line-height: 0.8; letter-spacing: 0.3em; }
+    p { margin: 0; font-size: 0.875rem; letter-spacing: 0.01em; color: var(--sand); line-height: 1.7; }
+    .links { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; font-feature-settings: 'case'; }
+    a { color: var(--ivory); text-decoration-thickness: 1px; text-underline-offset: 0.35em; }
+    a:focus-visible { outline: 2px solid #DB8566; outline-offset: 4px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 class="mark">KAI</h1>
+    <p>This page does not exist.<br><span lang="de">Diese Seite gibt es nicht.</span></p>
+    <p class="links"><a href="./">Back to KAI</a> · <a href="./?lang=de" lang="de">Zurück zu KAI</a></p>
+  </main>
+</body>
+</html>

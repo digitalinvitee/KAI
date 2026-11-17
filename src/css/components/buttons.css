@@ -1,0 +1,86 @@
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.button {
+  --btn-bg: transparent;
+  --btn-ink: currentColor;
+  --btn-line: currentColor;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  min-height: 3.25rem;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.75rem;
+  font-weight: var(--weight-medium);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-nav);
+  text-transform: uppercase;
+  font-feature-settings: 'case';
+  text-decoration: none;
+  white-space: nowrap;
+  color: var(--btn-ink);
+  background: var(--btn-bg);
+  border: 1px solid var(--btn-line);
+  border-radius: 0;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.2s var(--ease-out);
+}
+
+.button:active:not(:disabled) { transform: scale(0.98); }
+
+.button__arrow {
+  display: inline-block;
+  font-size: 1.1em;
+  letter-spacing: 0;
+  transition: transform 0.35s var(--ease-out);
+}
+.button:hover .button__arrow,
+.button:focus-visible .button__arrow { transform: translateX(4px); }
+
+.button--primary {
+  --btn-bg: var(--charcoal);
+  --btn-ink: var(--ivory);
+  --btn-line: var(--charcoal);
+}
+.button--primary:hover:not(:disabled) {
+  --btn-bg: var(--rust-ink);
+  --btn-line: var(--rust-ink);
+}
+
+.button--light {
+  --btn-bg: var(--ivory);
+  --btn-ink: var(--charcoal);
+  --btn-line: var(--ivory);
+}
+.button--light:hover { --btn-bg: var(--paper); --btn-line: var(--paper); }
+
+.button--ghost { --btn-line: var(--rule-strong); }
+.button--ghost:hover { --btn-line: currentColor; }
+
+.button--outline { --btn-line: currentColor; }
+.button--outline:hover { --btn-bg: currentColor; }
+.button--outline:hover > * { color: var(--outline-hover-ink, var(--ivory)); }
+
+.button--compact {
+  min-height: 2.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.6875rem;
+}
+
+.button--block {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.button:disabled,
+.button[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.button[aria-busy='true'] { cursor: progress; }

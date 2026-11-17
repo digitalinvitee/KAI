@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title data-i18n="meta.dashboardTitle">Demo dashboard · KAI · Fictional data</title>
+  <meta name="description" content="Demo reservation dashboard for KAI, a fictional restaurant concept by INVITÉ Studio. All data is invented." data-i18n-attr="content:meta.dashboardDescription">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#25251F">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
+  <link rel="preload" href="../assets/fonts/manrope-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/noto-sans-jp-kai.woff2" as="font" type="font/woff2" crossorigin>
+  <script>
+    (function () {
+      var root = document.documentElement;
+      root.classList.remove('no-js');
+      root.classList.add('js');
+      try {
+        var requested = new URLSearchParams(window.location.search).get('lang') || JSON.parse(window.localStorage.getItem('kai-locale') || 'null');
+        if (requested && requested !== 'en') { root.lang = requested; root.classList.add('i18n-pending'); }
+      } catch (e) {}
+      window.setTimeout(function () { root.classList.remove('i18n-pending'); }, 2600);
+    })();
+  </script>
+  <link rel="stylesheet" href="../src/css/dashboard.css" data-build="css">
+  <script type="module" src="../src/js/dashboard.js" data-build="js"></script>
+</head>
+<body class="dash-body">
+  <a class="skip-link" href="#dash-main" data-i18n="common.skip">Skip to content</a>
+
+  <div class="dash-banner" role="note">
+    <p class="dash-banner__title"><span class="dash-banner__mark" aria-hidden="true"></span><span data-i18n="dashboard.banner">Demo dashboard · Fictional data</span></p>
+    <p class="dash-banner__note" data-i18n="dashboard.bannerNote">Every guest and booking here is invented, apart from demo bookings you made in this tab.</p>
+  </div>
+
+  <header class="dash-header">
+    <div class="dash-header__brand">
+      <a class="brand brand--dark" href="../" aria-label="KAI, back to the website" data-i18n-attr="aria-label:dashboard.back">
+        <span class="brand__word">KAI</span><span class="brand__kanji" lang="ja" aria-hidden="true">会</span>
+      </a>
+      <h1 class="dash-header__title" data-i18n="dashboard.title">Reservations</h1>
+    </div>
+    <div class="dash-header__actions">
+      <div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:common.languageLabel" data-lang-switch></div>
+      <a class="button button--ghost button--compact" href="../"><span class="button__arrow button__arrow--back" aria-hidden="true">←</span><span data-i18n="dashboard.back">Back to website</span></a>
+      <button class="button button--primary button--compact" type="button" data-reset><span data-i18n="dashboard.reset">Reset demo data</span></button>
+    </div>
+  </header>
+
+  <main class="dash-main" id="dash-main" tabindex="-1">
+    <form class="dash-filters" role="search" aria-label="Filter reservations" data-i18n-attr="aria-label:dashboard.filters.label" data-filters>
+      <div class="dash-filter dash-filter--date">
+        <label class="dash-filter__label" for="filter-date" data-i18n="dashboard.filters.date">Date</label>
+        <div class="dash-filter__row">
+          <input class="dash-input" id="filter-date" name="date" type="date" data-filter-date>
+          <button class="chip" type="button" data-quick="today" data-i18n="dashboard.filters.today">Today</button>
+          <button class="chip" type="button" data-quick="all" data-i18n="dashboard.filters.allDates">All upcoming</button>
+        </div>
+      </div>
+      <div class="dash-filter">
+        <label class="dash-filter__label" for="filter-status" data-i18n="dashboard.filters.status">Status</label>
+        <select class="dash-input dash-select" id="filter-status" name="status" data-filter-status>
+          <option value="all" data-i18n="dashboard.status.all">All statuses</option>
+          <option value="confirmed" data-i18n="dashboard.status.confirmed">Confirmed</option>
+          <option value="completed" data-i18n="dashboard.status.completed">Completed</option>
+          <option value="cancelled" data-i18n="dashboard.status.cancelled">Cancelled</option>
+        </select>
+      </div>
+      <div class="dash-filter dash-filter--search">
+        <label class="dash-filter__label" for="filter-search" data-i18n="dashboard.filters.search">Search</label>
+        <input class="dash-input" id="filter-search" name="search" type="search" autocomplete="off" placeholder="Guest or reference" data-i18n-attr="placeholder:dashboard.filters.searchPlaceholder" data-filter-search>
+      </div>
+      <button class="dash-clear" type="button" data-clear data-i18n="dashboard.filters.clear">Clear filters</button>
+    </form>
+
+    <section class="dash-overview" aria-labelledby="overview-title">
+      <h2 class="dash-section-title" id="overview-title" data-overview-title>Overview</h2>
+      <dl class="stats" data-stats></dl>
+    </section>
+
+    <div class="dash-grid">
+      <section class="dash-panel dash-seatings" aria-labelledby="seatings-title">
+        <h2 class="dash-section-title" id="seatings-title" data-i18n="dashboard.seatings">Seatings</h2>
+        <ol class="seatings" data-seatings></ol>
+      </section>
+
+      <section class="dash-panel dash-list" aria-labelledby="list-title">
+        <div class="dash-list__head">
+          <h2 class="dash-section-title" id="list-title" data-i18n="dashboard.title">Reservations</h2>
+          <p class="dash-list__count" aria-live="polite" data-results></p>
+        </div>
+        <div class="table-wrap">
+          <table class="res-table" role="table" data-table>
+            <thead role="rowgroup">
+              <tr role="row">
+                <th role="columnheader" scope="col" data-i18n="dashboard.columns.guest">Guest</th>
+                <th role="columnheader" scope="col" data-i18n="dashboard.columns.date">Date</th>
+                <th role="columnheader" scope="col" data-i18n="dashboard.columns.time">Time</th>
+                <th role="columnheader" scope="col" class="num" data-i18n="dashboard.columns.party">Party</th>
+                <th role="columnheader" scope="col" data-i18n="dashboard.columns.status">Status</th>
+                <th role="columnheader" scope="col" data-i18n="dashboard.columns.reference">Reference</th>
+              </tr>
+            </thead>
+            <tbody role="rowgroup" data-rows></tbody>
+          </table>
+        </div>
+        <p class="dash-empty" hidden data-empty>
+          <span data-i18n="dashboard.empty">No reservations match these filters.</span>
+          <button class="button button--ghost button--compact" type="button" data-clear data-i18n="dashboard.filters.clear">Clear filters</button>
+        </p>
+        <button class="button button--ghost dash-more" type="button" hidden data-more data-i18n="dashboard.showMore">Show more</button>
+      </section>
+    </div>
+  </main>
+
+  <dialog class="dash-dialog" aria-labelledby="dialog-title" data-dialog>
+    <div class="dash-dialog__inner" data-dialog-body></div>
+  </dialog>
+
+  <dialog class="dash-dialog dash-dialog--small" aria-labelledby="reset-title" data-reset-dialog>
+    <div class="dash-dialog__inner">
+      <h2 class="dash-dialog__title" id="reset-title" data-i18n="dashboard.reset">Reset demo data</h2>
+      <p class="dash-dialog__text" data-i18n="dashboard.resetConfirm">Reset all demo data? Your demo bookings and cancellations in this tab will be removed.</p>
+      <div class="dash-dialog__actions">
+        <button class="button button--ghost button--compact" type="button" data-reset-cancel data-i18n="dashboard.resetNo">Keep data</button>
+        <button class="button button--primary button--compact" type="button" data-reset-confirm data-i18n="dashboard.resetYes">Reset</button>
+      </div>
+    </div>
+  </dialog>
+
+  <p class="toast" role="status" aria-live="polite" data-toast></p>
+</body>
+</html>
